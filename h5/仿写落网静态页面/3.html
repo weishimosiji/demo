@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!-- 这个是标题栏图标 -->
+    <link type="image/x-icon" href="http://www.luoo.net/favicon.ico" rel="shortcut icon">
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            font-family: "微软雅黑";
+        }
+        .logo{
+
+            width: 100%;
+            height: 60px;
+            /* overflow: hidden; */
+            background-color: #F2F2F2;
+            display: inline-block;
+        }
+        .picture{
+            margin-left:150px;
+            margin-top:13px;
+            width: 34px;
+            height: 34px;
+            background-position: 0 -300px;
+            background-image: url(http://s.luoo.net/img/icon-common.png);
+
+            display: inline-block;
+            background-repeat: no-repeat;
+        }
+        .ii{
+            display: inline-block;
+        }
+        .box{
+            position: absolute;
+            line-height: 30px;
+
+            display: inline-block;
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+        .box-2{
+            margin-top:20px;
+            margin-left: 320px;
+            display: inline-block;
+            position: absolute;
+            background-color: #EDEDED;
+            height: 20px;
+            width: 85px;
+            border:1px solid gray;
+            border-radius: 10px;
+        }
+        .box-3{
+            display: inline-block;  ·
+            position:absolute;
+            height: 20px;
+            width: 80px;
+            font-size: 13px;
+
+            margin-top: 20px;
+            margin-left:70%;
+        }
+        .box-3 p{
+            text-align: center;
+            cursor:pointer;
+        }
+        .in{
+            background-color: #EDEDED;
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            border:none;
+            margin-bottom: 1px;
+            margin-left: 25px;
+            outline: none;
+        }
+        ul li{
+            padding-left:20px;
+            display: inline-block;
+            overflow: hidden;
+        }
+        .box a:link {color: black;}
+        .box a:hover{color: #BA796D;}
+        a{
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn{
+            cursor:pointer;
+            height: 16px;
+            width: 20px;
+            border:none;
+            margin: 3px 0 0 5px;
+            background-color: #EDEDED;
+            background-position: -110px -240px;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-image: url(http://s.luoo.net/img/icon-common.png);
+        }
+        .pbox{
+            border:1px solid white;
+            height: 320px;
+            width: 960px;
+            position: relative;
+            margin: 30px auto;
+        }
+        .pbox ul{
+            text-align: center;
+            overflow: hidden;
+            margin-top: 320px;
+        }
+        .smallbox{
+            float: bottom;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color:gray;
+            cursor:pointer;
+        }
+        .smallbox:hover{
+            background-color: #E43E4A;
+        }
+        .smallbox a{
+            position: absolute;
+            left:0px;
+            top: 0px;
+
+        }
+        .smallbox:hover img{
+            display: block;
+            z-index: 520;
+        }
+        .smallbox a img{
+
+            display: none;
+        }
+        .pbox-2{
+
+            height: 550px;
+            width: 960px;
+            margin: 0 auto;
+        }
+        .qikan{
+            float:left;
+            height: 30px;
+            width: 120px;
+            border-left:3px solid ;
+            border-color:#DD5862;
+            text-align: center;
+
+        }
+        h3{
+            font-size: 23px;
+            font-weight: 300;
+        }
+        .fright{
+
+
+            float: right;
+
+        }
+        .tag{
+            margin-left: 3px;
+        }
+        .tag:link{
+            color: #939393;
+            font-size: 13px;
+        }
+        .tag:hover{color:#DD5862}
+        .musicbox{
+            width: 640px;
+            height: 452px;
+            position: absolute;
+
+            float: left;
+                margin-top: 50px;
+
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        /* 毛玻璃效果  滤镜 */
+        .musicbox:hover img{
+         -webkit-filter: blur(10px); /* Chrome, Opera */
+         -moz-filter: blur(10px);
+         -ms-filter: blur(10px);
+            filter: blur(10px);
+
+            }
+        .blue:hover{
+            -webkit-filter: blur(10px); /* Chrome, Opera */
+         -moz-filter: blur(10px);
+         -ms-filter: blur(10px);
+            filter: blur(10px);
+        }
+        /* .music:hover a{z-index: -1} */
+        .action{
+            margin-top: 505px;
+            margin-left: -120px;
+            float: left;
+            font-size: 12px;
+
+            display: inline-block;
+
+        }
+        .cover-wrapper{
+            float: right;
+            width: 300px;
+            height: 209px;
+
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top:30px;
+        }
+        .cover-wrapper-2{
+            float: right;
+            width: 300px;
+            height: 209px;
+
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top:13px;
+        }
+        .cover-wrapper img{
+            width: 100%;
+            height: 100%;
+
+        }
+        .cover-p{
+
+            margin-top: 5px;
+            font-size: 12px;
+            margin-left: 100px;
+        }
+        .tea {
+            margin-top: 20px;
+            float: left;
+
+            width: 500px;
+            height: 300px;
+
+        }
+        .tea img{width: 160px;height: 160px;border-radius: 50%;float: left;}
+        .hh{margin:30px 0 0 30px;float: left;width: 300px;
+            height:100px;}
+        .jm{margin-top: 170px;
+            font-size: 14px;
+            font-weight: 100;
+            width: 100%;
+            height: auto;}
+        .fright-2{
+
+            width:450px;
+            height:350px;
+            float: right;
+
+        }
+        .fright-2 img{width: 100%;height: 100%}
+        .remen{width:310px;height:175px;display:inline-block}
+        .remen-cover{width: 120px;height: 160px;float: left;
+            border-radius: 5px;overflow: hidden;}
+        .remen-cover img{width: 100%;height: 100%}
+        .info{float: right;margin: 10px 10px 0 0}
+        .last{margin-top: 50px;background-color: #222;width: 100%;height: 220px}
+        .icon-ios {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+
+            /* line-height: 1; */
+            z-index: 100;
+            vertical-align: middle;
+            background-image: url(img/icon-common.png);
+            background-position: top left;
+            background-repeat: no-repeat;
+            background-position: 0 -90px;}
+            .icon-android {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 1;
+                vertical-align: middle;
+                background-image: url(img/icon-common.png);
+                background-position: top left;
+                background-repeat: no-repeat;
+                background-position: 0 -30px;
+            }
+            .icon-wp {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 1;
+                vertical-align: middle;
+                background-image: url(img/icon-common.png);
+                background-position: top left;
+                background-repeat: no-repeat;
+                background-position: 0 -60px;
+            }
+            .ln-app {
+                color: #e1e1e1;
+                display: inline-block;
+                margin-top: 12px;
+                margin-bottom: 7px;
+            }
+            .ln-app:link{
+                color: #D4D4D4;
+            }
+            .thelast{
+                margin-top: 30px;
+
+                float: right;
+                width: 135px;
+                height: 20px;
+                overflow: hidden;
+                background-image: url(img/icon-common.png);
+            }
+            .clearfix:before, .clearfix:after {
+                clear: both;
+                display: table;
+                content: "";
+                line-height: 0;
+            }
+            .guanyu{width:320px;height:180px;margin-top:10px;font-size:13px;float:left;display:inline-block}
+            .middle{width:310px;height:180px;margin-top:10px;font-size:13px;display:inline-block;margin-left:40px;float:left}
+            .tubiao{width:285px;height:180px;margin-top:10px;font-size:13px;display:inline-block;text-align:right;}
+            .tu{display:inline-block;width:30px;height:30px;border:1px solid white}
+            .icon-sns-qq {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 1;
+                vertical-align: middle;
+                background-image: url(../img/icon-common.png);
+                background-position: top left;
+                background-repeat: no-repeat;
+                background-position: -110px -270px;
+            }
+            .icon-sns-wechat {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 1;
+                vertical-align: middle;
+                background-image: url(../img/icon-common.png);
+                background-position: top left;
+                background-repeat: no-repeat;
+                background-position: 0 -270px;
+            }
+
+            .icon-sns-weibo {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 1;
+                vertical-align: middle;
+                background-image: url(../img/icon-common.png);
+                background-position: top left;
+                background-repeat: no-repeat;
+                background-position: 0 -210px;
+            }
+            .icon-sns-douban {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 1;
+                vertical-align: middle;
+                background-image: url(../img/icon-common.png);
+                background-position: top left;
+                background-repeat: no-repeat;
+                background-position: 0 -240px;
+            }
+            .guanyu p{color:#D4D4D4;margin-top:5px}
+            .remenbox{width:100%;height:360px;margin-top:20px;display:inline-block}
+            .remen a:link{color: black}
+            .remen a:hover{color: red}
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <div class="ii">
+        <a href="http://www.luoo.net/" class="picture"></a>
+        </div>
+        <div class="box">
+        <ul>
+            <li>
+                <a href="http://www.luoo.net/music/">期刊</a>
+            </li>
+            <li>
+                <a href="http://www.luoo.net/musician/">单曲</a>
+            </li>
+            <li>
+                <a href="http://www.luoo.net/essays/">专栏</a>
+            </li>
+            <li>
+                <a href="http://www.luoo.net/event/">活动</a>
+            </li>
+            <li>
+                <a href="http://www.luoo.net/app/">APP</a>
+            </li>
+        </ul>
+        </div>
+        <div class="box-2">
+            <button class="btn"></button>
+            <input type="text" class="in">
+        </div>
+        <div class="box-3">
+            <p>注册/登录</p>
+        </div>
+    </div>
+    <div class="pbox">
+    <ul>
+        <li>
+            <div class="smallbox">
+                <a href="http://www.luoo.net/site/go/439?code=aHR0cDovL3d3dy5sdW9vLm5ldC92b2NhbC8wMDQ" title="AirRadio" target="_blank"><img src="http://img-cdn.luoo.net/site/201612/5846b241d7c8c.jpg" alt="AirRadio" draggable="false"
+                style="display:block;"></a>
+            </div>
+        </li>
+        <li>
+            <div class="smallbox">
+                <a href="http://www.luoo.net/site/go/509?code=aHR0cDovL3d3dy5sdW9vLm5ldC9lc3NheS84MDE" title="我在巴塞罗那看了一场The Cure的现场" target="_blank"><img src="http://img-cdn.luoo.net/site/201612/58467a208e30b.jpg" alt="我在巴塞罗那看了一场The Cure的现场" draggable="false"></a>
+            </div>
+        </li>
+        <li>
+            <div class="smallbox">
+                <a href="http://www.luoo.net/site/go/508?code=aHR0cDovL3d3dy5sdW9vLm5ldC9lc3NheS84MDA" title="莫里森" target="_blank"><img src="http://img-cdn.luoo.net/site/201612/584151fa0ea3b.jpg" alt="莫里森" draggable="false"></a>
+            </div>
+        </li>
+        <li>
+            <div class="smallbox">
+                <a href="http://www.luoo.net/site/go/504?code=aHR0cDovL3d3dy5sdW9vLm5ldC9lc3NheS83OTU" title="玩具船长" target="_blank"><img src="http://img-cdn.luoo.net/site/201611/582ee357690db.jpg" alt="玩具船长" draggable="false"></a>
+            </div>
+        </li>
+    </ul>
+    </div>
+    <div class="pbox-2">
+        <div class="qikan">
+            <h3>音乐期刊</h3>
+        </div>
+
+            <div class="fright">
+                <a href="http://www.luoo.net/music/indie" class="tag">独立音乐</a>
+                <a href="http://www.luoo.net/music/folk" class="tag">民谣</a>
+                <a href="http://www.luoo.net/music/metal" class="tag">金属</a>
+                <a href="http://www.luoo.net/music/electronic" class="tag">电子</a>
+                <a href="http://www.luoo.net/music/pop" class="tag">流行</a>
+                <a href="http://www.luoo.net/music/britpop" class="tag">英伦</a>
+                <a href="http://www.luoo.net/music/post-rock" class="tag">后摇</a>
+                <a href="http://www.luoo.net/music/psychedelic" class="tag">迷幻</a>
+                <a href="http://www.luoo.net/music/neo-wave" class="tag">暗潮</a>
+                <a href="http://www.luoo.net/music/ambient" class="tag">氛围</a>
+                <a href="http://www.luoo.net/music/" class="tag">更多></a>
+                <div>
+                <a href="http://www.luoo.net/music/875" class="cover-wrapper">
+                            <img src="http://img-cdn.luoo.net/pics/vol/58406b4dd4509.jpg?imageView2/1/w/640/h/452" alt="初冬的倒影" class="blue"></a>
+                </div>
+                <p class="cover-p">vol.875 初冬的倒影</p>
+                <div>
+                <a href="http://www.luoo.net/music/874" class="cover-wrapper-2">
+                            <img src="http://img-cdn.luoo.net/pics/vol/583b045d826cb.jpg?imageView2/1/w/640/h/452" alt="心如少年"
+                            class="blue">
+                        </a>
+                </div>
+                <p class="cover-p">vol.874 心如少年</p>
+            </div>
+
+
+            <div class="musicbox">
+                <a href="http://www.luoo.net/music/876">
+                    <img src="http://img-cdn.luoo.net/pics/vol/5846f43eae6d6.jpg?imageView2/1/w/640/h/452" alt="就在面前的过去">
+                 </a>
+            </div>
+
+
+        <div class="action">
+            <p>vol.876 就在面前的过去</p>
+        </div>
+
+</div>
+<div class="pbox-2" style="margin-top:30px;height:400px">
+    <div>
+        <div class="qikan">
+                <h3>原创推荐</h3>
+        <div class="tea">
+        <img src="http://img-cdn.luoo.net/pics/singles/17253/i_5847893bacc45.jpg?imageView2/1/w/350" alt="蒋明-吃茶去">
+        <div class="hh">
+            <h3 style="width:100%;text-align:left">吃茶去</h3>
+            <p style="margin-top:10px;text-align:left;font-size:18px;color:#939393">蒋明</p>
+            <p style="margin-top:10px;text-align:right;font-size:13px;color:#939393">2016-12-07</p>
+        </div>
+        <div class="jm">
+        <p>“蒋明爱茶，所以为茶写歌。这些年他访茶山，寻茶人，日夜与茶相伴，终于写成了这首《吃茶去》。歌中依然体现了蒋明对于传承传统文化的自觉，词、曲、编都充满东方美学的韵味，却可贵地没有落入所谓“古风”的窠臼里。古筝及笛箫的运用恰到好处，而吉他扫弦及架子鼓的节奏干脆利落，古老的东方乐器与现代的西方乐器自然地碰撞及融合，营造出了一片疏朗开阔的天地。”</p>
+        </div>
+    </div>
+        </div>
+        <div>
+            <div class="fright-2">
+                    <div style="float:right">
+                        <a href="http://www.luoo.net/musician/" class="tag">单曲</a>
+                        <a href="http://www.luoo.net/essays/" class="tag">专栏</a>
+                        <a href="http://www.luoo.net/musician/" class="tag">更多></a>
+                    </div>
+                <div style="float:left;width:200px;height:200px;margin-top:50px;margin-left:15px">
+                    <a href="http://www.luoo.net/essay/801">
+                                <img src="http://img-cdn.luoo.net/library/201612/FvIElxj-yiqRu0GgF-AdlQLJAAqq.jpg?imageView2/1/w/350/h/250" alt="我在巴塞罗那看了一场The Cure的现场">
+                            </a>
+                    <p style="margin-top:30px;font-size:14px">我在巴塞罗那看了一场The Cure的现场</p>
+                    <p style="font-size:12px;color:#939393;margin-top:10px">Darkwoodtree</p>
+                </div>
+                <div style="float:right;width:200px;height:200px;margin-top:30px;margin-left:15px">
+                   <a href="http://www.luoo.net/essay/800">
+                                <img src="http://img-cdn.luoo.net/library/201612/FqvFa8bfTllneHWZWAxI_qrw6GJS.jpg?imageView2/1/w/350/h/250" alt="吉姆·莫里森：点燃火焰 推开大门" style="border-radius:5px">
+                            </a>
+                    <p style="margin-top:30px;font-size:14px">吉姆·莫里森：点燃火焰 推开大门</p>
+                    <p style="font-size:12px;color:#939393;margin-top:10px">鳟臣</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="pbox-2" style="height:430px">
+    <div class="qikan">
+            <h3>热门活动</h3>
+    </div>
+    <div>
+
+                <div class="fright">
+                    <a href="http://www.luoo.net/event/index/city/100002" class="tag">北京</a>
+                    <a href="http://www.luoo.net/event/index/city/100819" class="tag">上海</a>
+                    <a href="http://www.luoo.net/event/index/city/101991" class="tag">广州</a>
+                    <a href="http://www.luoo.net/event/index/city/102015" class="tag">深圳</a>
+                    <a href="http://www.luoo.net/event/index/city/101733" class="tag">武汉</a>
+                    <a href="http://www.luoo.net/event/index/city/102323" class="tag">成都</a>
+                    <a href="http://www.luoo.net/event/index/city/103296" class="tag">台湾</a>
+                    <a href="http://www.luoo.net/event/index/city/103269" class="tag">香港</a>
+                    <a href="http://www.luoo.net/event/" class="tag">更多></a>
+                </div>
+    </div>
+    <div class="remenbox">
+        <div class="remen">
+            <a href="http://www.luoo.net/event/14509" class="remen-cover">
+                            <img src="http://img-cdn.luoo.net/pics/event/14509/584a7b7c5b6e0.jpg?imageView2/1/w/180/h/225" alt="AV大久保鼓手告别专场" class="cover rounded">
+                        </a>
+                        <div class="info">
+                            <a href="http://www.luoo.net/event/14509" class="title" title="AV大久保鼓手告别专场">AV大久保鼓手告别专场</a>
+                            <p class="meta" style="margin-top:30px">时间：2017-01-01</p>
+                            <p class="meta">地点：北京</p>
+                            <p class="meta">场所：乐空间</p>
+                            <p class="meta">费用：80元 - 100元</p>
+                        </div>
+        </div>
+        <div class="remen">
+            <a href="http://www.luoo.net/event/14509" class="remen-cover">
+                            <img src="http://img-cdn.luoo.net/pics/event/14509/584a7b7c5b6e0.jpg?imageView2/1/w/180/h/225" alt="AV大久保鼓手告别专场" class="cover rounded">
+                        </a>
+                        <div class="info">
+                            <a href="http://www.luoo.net/event/14509" class="title" title="AV大久保鼓手告别专场">AV大久保鼓手告别专场</a>
+                            <p class="meta" style="margin-top:30px">时间：2017-01-01</p>
+                            <p class="meta">地点：北京</p>
+                            <p class="meta">场所：乐空间</p>
+                            <p class="meta">费用：80元 - 100元</p>
+                        </div>
+        </div>
+        <div class="remen">
+
+                        <a href="http://www.luoo.net/event/14504" class="remen-cover">
+                            <img src="http://img-cdn.luoo.net/pics/event/14504/5847cfa85d540.jpg?imageView2/1/w/180/h/225" alt="沼泽乐队《二维折叠》北京专场" class="cover rounded">
+                        </a>
+                        <div class="info">
+                        <a href="http://www.luoo.net/event/14504" class="title" title="沼泽乐队《二维折叠》北京专场">沼泽乐队《二维折叠》<br/>北京专场</a>
+                            <p class="meta" style="margin-top:10px">时间：2016-12-24</p>
+                            <p class="meta">地点：北京</p>
+                            <p class="meta">场所：乐空间</p>
+                            <p class="meta">费用：100元 - 120元</p>
+                        </div>
+
+        </div>
+        <div class="remen">
+            <a href="http://www.luoo.net/event/14509" class="remen-cover">
+                            <img src="http://img-cdn.luoo.net/pics/event/14509/584a7b7c5b6e0.jpg?imageView2/1/w/180/h/225" alt="AV大久保鼓手告别专场" class="cover rounded">
+                        </a>
+                        <div class="info">
+                            <a href="http://www.luoo.net/event/14509" class="title" title="AV大久保鼓手告别专场">AV大久保鼓手告别专场</a>
+                            <p class="meta" style="margin-top:30px">时间：2017-01-01</p>
+                            <p class="meta">地点：北京</p>
+                            <p class="meta">场所：乐空间</p>
+                            <p class="meta">费用：80元 - 100元</p>
+                        </div>
+        </div>
+        <div class="remen">
+
+                        <a href="http://www.luoo.net/event/14486" class="remen-cover">
+                            <img src="http://img-cdn.luoo.net/pics/event/14486/583fe3eb72628.jpg?imageView2/1/w/180/h/225" alt="俄罗斯电子后摇I am waiting for you last summer2016中国巡演">
+                        </a>
+                        <div class="info">
+                            <a href="http://www.luoo.net/event/14486" class="title" title="俄罗斯电子后摇I am waiting for you last summer2016中国巡演">俄罗斯电子后摇I am <br/>waiting for you last</a>
+                            <p class="meta" style="margin-top:10px">时间：2016-12-23</p>
+                            <p class="meta">地点：广州</p>
+                            <p class="meta">场所：Tu凸空间</p>
+                            <p class="meta">费用：80元 - 100元</p>
+
+                    </div>
+        </div>
+        <div class="remen">
+             <a href="http://www.luoo.net/event/14504" class="remen-cover">
+                            <img src="http://img-cdn.luoo.net/pics/event/14504/5847cfa85d540.jpg?imageView2/1/w/180/h/225" alt="沼泽乐队《二维折叠》北京专场" class="cover rounded">
+                        </a>
+                        <div class="info">
+                        <a href="http://www.luoo.net/event/14504" class="title" title="沼泽乐队《二维折叠》北京专场">沼泽乐队《二维折叠》<br/>北京专场</a>
+                            <p class="meta" style="margin-top:10px">时间：2016-12-24</p>
+                            <p class="meta">地点：北京</p>
+                            <p class="meta">场所：乐空间</p>
+                            <p class="meta">费用：100元 - 120元</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="last">
+    <div style="width:960px;height:180px;margin:0 auto;">
+    <div style="padding-top:30px;color:white">
+            <p style="display:inline-block;float:left">关于</p>
+            <p style="display:inline-block;margin-left:330px">APP</p>
+            <p style="display:inline-block;float:right">关于落网</p>
+        </div>
+        <div class="guanyu clearfix">
+            <p>关于落网</p>
+            <p>加入我们</p>
+            <p>联系合作</p>
+            <p>反馈建议</p>
+            <p>友情链接</p>
+        </div>
+        <div class="middle clearfix">
+            <p>
+                <a class="ln-app" href="http://www.luoo.net/app/"><span class="icon-ios"></span>&nbsp;&nbsp;for iPhone</a>
+            </p>
+            <p><a class="ln-app" href="http://www.luoo.net/app/"><span class="icon-android"></span>&nbsp;&nbsp;for Android</a></p>
+            <p><a class="ln-app" href="http://www.luoo.net/app/"><span class="icon-wp"></span>&nbsp;&nbsp;for Windows Phone 8</a></p>
+        </div>
+        <div class="tubiao clearfix">
+            <div style="width:280px;height60pc;text-align:right">
+                <div class="icon-sns-qq"></div>
+                <div class="icon-sns-wechat"></div>
+                <div class="icon-sns-weibo"></div>
+                <div class="icon-sns-douban"></div>
+            </div>
+            <p style="color:white;margin-top:10px">© 2016 落网</p>
+            <div class="thelast"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

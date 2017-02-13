@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 12px;
+            font-family: "微软雅黑";
+        }
+        ul,li {
+            list-style: none;
+        }
+        a {
+            /*text-decoration: none;*/
+        }
+        .clearfix {
+            zoom: 0;
+        }
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        .box{
+            position: relative;
+            top: 50px;
+            left: 50px;
+            width: 800px;
+            height: 300px;
+            border: 5px solid pink;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .box-1{
+            border-right: 5px solid pink;
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            background-image: url(image/1.gif);
+            top: 0;
+            left: 0;
+            background-size: cover;
+        }
+        .box-2{
+            position: absolute;
+            top: 0;
+            left: 420px;
+            width: 300px;
+        }
+
+        li{
+            color: white;
+            margin-top: 18px;
+            height: 17px;
+            font-size: 17px;
+        }
+        li.hover{
+            color: pink;
+        }
+        textarea{
+            display: none;
+        }
+        audio{
+            margin-top:50px;
+            margin-left: 50px;
+        }
+        .list{
+            display: none;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100px;
+            height: 230px;
+            border: 1px solid white;
+        }
+        .list li{
+            text-align: center;
+            padding:5px;
+            border-bottom: 1px dashed white;
+        }
+        .list li:last-child{
+            border-bottom: none;
+        }
+        .list li a{
+            color: white;
+            text-decoration: none;
+        }
+        .list li a:hover{
+            color: red;
+        }
+        .move{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+        }
+        .bgmenu{
+            opacity: 0.9;
+            background-color: white;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            text-align: center;
+        }
+        .bgbox{
+            display: inline-block;
+            margin: 25px auto;
+            width: 1200px;
+            height: 100px;
+        }
+        .bgbox div{
+            position: relative;
+            margin:10px auto;
+            display:inline-block;
+            width: 150px;
+            height: 80px;
+            overflow: hidden;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .log{
+            display: none;
+            width: 35px;
+            height: 30px;
+            background-image: url(images/1.png);
+            background-position: -92px -3px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .closebtn{
+            width: 50px;
+            height: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+        }
+    </style>
+</head>
+<body style="background-image: url(image/bg.jpg)" id="body">
+
+    <!-- <script>
+    var str = 'Mr.ss .MsaM';
+    var arr = [];
+    for(var i=0;i<str.length;i++){
+        if(str.charAt(i)=='M'){
+            arr.push(i);
+        }
+    }
+    alert(arr);
+    </script> -->
+    <textarea id="text">
+        [00:02.00]求佛 [00:04.40]词曲：陈超 [00:06.48]演唱：誓言 [00:08.48] [00:35.50]当月光洒在我的脸上 [00:39.36]我想我就快变了模样 [00:44.25]有一种叫做撕心裂肺的汤 [00:48.16]喝了它有神奇的力量 [00:51.30] [00:52.93]闭上眼   看见天堂 [00:56.02]那是藏着你笑的地方 [01:00.96]我躲开无数个猎人的枪 [01:04.78]赶走坟墓爬出的忧伤 [01:08.00] [01:08.56]为了你  我变成狼人模样 [01:12.67]为了你  染上了疯狂 [01:16.73]为了你  穿上厚厚的伪装 [01:20.99]为了你  换了心肠 [01:24.02] [01:26.11]我们还能不能再见面 [01:29.10]我在佛前苦苦求了几千年 [01:33.26]愿意用几世换我们一世情缘 [01:37.45]希望可以感动上天 [01:41.08] [01:41.68]我们还能不能能不能再见面 [01:45.79]我在佛前苦苦求了几千年 [01:49.96]当我在踏过这条奈何桥之前 [01:54.13]让我再吻一吻你的脸 [01:58.05] [02:33.20]闭上眼   看见天堂 [02:36.16]那是藏着你笑的地方 [02:41.22]我躲开无数个猎人的枪 [02:44.97]赶走坟墓爬出的忧伤 [02:48.08] [02:48.68]为了你  我变成狼人模样 [02:52.82]为了你  染上了疯狂 [02:57.04]为了你  穿上厚厚的伪装 [03:01.23]为了你  换了心肠 [03:04.10] [03:06.03]我们还能不能再见面 [03:09.24]我在佛前苦苦求了几千年 [03:13.38]愿意用几世换我们一世情缘 [03:17.64]希望可以感动上天 [03:21.23] [03:21.83]我们还能不能能不能再见面 [03:25.90]我在佛前苦苦求了几千年 [03:30.12]当我在踏过这条奈何桥之前 [03:34.38]让我再吻一吻你的脸 [03:39.11] [03:39.71]我们还能不能再见面 [03:42.68]我在佛前苦苦求了几千年 [03:46.80]愿意用几世换我们一世情缘 [03:51.00]希望可以感动上天 [03:55.28]我们还能不能能不能再见面 [03:59.29]我在佛前苦苦求了几千年 [04:03.63]当我在踏过这条奈何桥之前 [04:07.59]让我再吻一吻你的脸 [04:12.02]让我再吻一吻你的脸 [04:16.11]让我再吻一吻你的脸 [04:21.92]
+    </textarea>
+    <div class="box">
+        <div class="box-1"></div>
+        <div class="box-2">
+            <ul id="music">
+                <!-- <li>喝了它有神器的力量</li>
+                <li>闭上眼 看见天堂</li>
+                <li>那是藏着你笑的地方</li>
+                <li style="color:pink">我躲开无数个猎人的枪</li>
+                <li>赶走坟墓爬出的忧伤</li>
+                <li>为了你 我变成狼人模样</li>
+                <li>为了你 染上了疯狂</li> -->
+            </ul>
+        </div>
+    </div>
+    <audio id="audio" src="2.mp3" controls="controls" autoplay loop></audio>
+    <div class="list" id="list">
+        <ul>
+            <li>
+                <a href="#">充50</a>
+            </li>
+            <li>
+                <a href="#">充100</a>
+            </li>
+            <li>
+                <a href="#">充200</a>
+            </li>
+            <li>
+                <a href="#">充500</a>
+            </li>
+            <li>
+                <a href="#" id="open">修改背景</a>
+            </li>
+        </ul>
+    </div>
+    <div id="move" class="move"></div>
+    <div id="bgmenu" class="bgmenu">
+        <div class="bgbox">
+            <div>
+                <span class="log" id="log_1"></span>
+                <img src="images\0.jpg" id="bg_1">
+            </div>
+            <div>
+                <span class="log" id="log_2"></span>
+                <img src="images\1.jpg" id="bg_2">
+            </div>
+            <div>
+                <span class="log" id="log_3"></span>
+                <img src="images\2.jpg" id="bg_3">
+            </div>
+            <div>
+                <span class="log" id="log_4"></span>
+                <img src="images\3.jpg" id="bg_4">
+            </div>
+            <div>
+                <span class="log" id="log_5"></span>
+                <img src="images\4.jpg" id="bg_5">
+            </div>
+            <div>
+                <span class="log" id="log_6"></span>
+                <img src="images\5.jpg" id="bg_6">
+            </div>
+            <button class="closebtn" id="close">关闭</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.onload = function(){
+            lrc.init();
+            audio.ontimeupdate = function(){
+                var time = parseInt(this.currentTime);
+                lrc.jump(time);
+            };
+        };
+        var lrc = {
+            init:function(){
+                var music = document.getElementById('music');
+                var str = document.getElementById('text').value;
+                var arr = str.split('[');
+
+                    var html ='';
+                    for(var i = 1;i<arr.length;i++){
+                        var a = arr[i].split(']');
+
+                        var arr3 = a[0].split(':');
+                        var mm = parseInt(arr3[0]*60+arr3[1]*1);
+                        html+='<li id="t_'+mm+'">'+a[1]+'</li>';
+                    };
+                    music.innerHTML = html;
+            },
+            jump:function(time){
+                var t = document.getElementById('t_'+time);
+                if(t){
+                    var index = this.indexof(t)-3;
+                    var arr = this.elseof(t);
+                    for(var i=0;i<arr.length;i++){
+                        arr[i].className='';
+                    }
+                    music.style.marginTop=-35*(index<0? 0:index)+'px';
+                    t.className='hover';
+                }
+            },
+            indexof:function(t){
+                var index = 0;
+                var list = t.parentElement.children;
+                for(var i=0;i<list.length;i++){
+                    if(list[i]==t){
+                        index = i;
+                        break;
+                    }
+                }
+                return index;
+            },
+            elseof:function(t){
+                var arr = [];
+                var list = t.parentElement.children;
+                for(var i=0;i<list.length;i++){
+                    if(list[i]!=t){
+                        arr.push(list[i]);
+                    }
+                }
+                return arr;
+            }
+        }
+        var list = document.getElementById('list');
+         var openbtn = document.getElementById('open');
+        var menu = document.getElementById('bgmenu');
+
+        document.oncontextmenu = function(event){
+            var e = event||window.event;
+            var x = e.clientX;
+            var y = e.clientY;
+            list.style.left = x+'px';
+            list.style.top = y+'px';
+            list.style.display='block';
+            return false;
+        }
+        document.onclick = function(){
+            list.style.display = 'none';
+        }
+        var bbox = document.getElementById('move');
+        var downX = 0;
+        var downY = 0;
+
+        var flag = false;
+        bbox.onmousedown = function(event){
+            flag = true
+
+                var e = event||window.event;
+                var disX = e.clientX - bbox.offsetLeft;
+                var disY = e.clientY - bbox.offsetTop;
+                downX = disX;
+                downY = disY;
+
+
+        }
+        document.onmousemove = function(event){
+            if(flag){
+                var e = event||window.event;
+                var X = e.clientX;
+                var Y = e.clientY;
+                bbox.style.left = X-downX+'px';
+                bbox.style.top = Y-downY+'px';
+
+            }
+        }
+        document.onmouseup = function(event){
+            var e = event||window.event;
+            if(flag){
+
+                flag = false;
+            }
+        }
+
+
+        openbtn.onclick = function(){
+
+            menu.style.display = 'block';
+
+        }
+        var logs = [];
+        var body = document.getElementById('body');
+        for(var i = 1;i<7;i++){
+            logs.push(document.getElementById('log_'+i));
+        }
+        var imgs = [];
+        for(var i = 1;i<7;i++){
+            imgs.push(document.getElementById('bg_'+i));
+        }
+        for(var i=0;i<imgs.length;i++){
+            imgs[i].onclick = (function(x){
+                return function(){
+                    logs[x].style.display = 'block';
+                    body.style.backgroundImage = 'url('+imgs[x].src+')';
+                    closeelse(x);
+                }
+            })(i);
+        }
+
+            var closeelse = function(a){
+                for(var i=0;i<6;i++){
+                    if(i!=a){
+                        logs[i].style.display = 'none';
+                    }
+                }
+            }
+            var closebtn = document.getElementById('close');
+            closebtn.onclick = function(){
+                menu.style.display = 'none';
+            }
+
+
+
+    </script>
+</body>
+</html>
