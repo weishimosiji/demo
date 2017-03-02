@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+        }
+        .box{
+            width: 1366px;
+            /*border: 1px solid red;*/
+        }
+        .box div{
+            margin: 1px 1px 1px 1px;
+            display: inline-block;
+            width: 451px;
+            height: 200px;
+            border: 1px solid blue;
+            background-image: url("123/默认.jpg");
+            background-size: cover;
+        }
+        /*and和()之间一定要有空格   不然media就没有用*/
+        @media screen and (max-width: 910px) and (min-width: 458px){
+            .box{
+                width: 910px;
+            }
+        }
+        @media screen and (max-width: 470px){
+            .box{
+                width: 457px;
+            }
+        }
+    </style>
+</head>
+<body onload="add()">
+    <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script>
+        var child = document.getElementsByClassName('box')[0].childNodes;
+        var add = function(){
+            for(var i=0;i<child.length;i++){
+//                在你的代码中，其实当你循环childNodes的时候，第一个节点是textNode，不具备style属性，所以会报'undefined';
+//                nodeType 属性返回以数字值返回指定节点的节点类型。
+//                如果节点是元素节点，则 nodeType 属性将返回 1。
+//                如果节点是属性节点，则 nodeType 属性将返回 2
+                if(child[i].nodeType===1) {
+                    child[i].style.backgroundImage = 'url(123/' + ((i+1)/2) + '.jpg)';
+                }
+            }
+        };
+
+//        for循环
+//        for(var i=0;i<child.length;i++){
+//            if(child[i].nodeType===1) {
+//                (function (i) {
+//                    child[i].onclick = function(){
+//                        alert(i);
+//                    }
+//                })(i)
+//
+//            }
+//        }
+
+
+//        递归
+        (function print(i) {
+            child[i].onclick = function(){
+                window.open('file:///H:/H5/h5project/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/windowopen.html?id='+((i+1)/2));
+            }
+            return (i>child.length)?0:print(i+1);
+        })(0)
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+orientation：landscape 横屏
+orientation：portrait 竖屏
+媒体查询一般写在style的后面 不然会影响功能
+media也可以用link链接外部样式
+<link href="" rel="stylesheet" media="">
+
+and和（）中间要加空格  不然没效果
+
+这里还加上了window.open传递参数和接收参数并设置到新页面

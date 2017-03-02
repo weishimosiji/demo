@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+    .b-box{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .box{
+        animation: mymove 3s infinite;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+    }
+    .small{
+        position:fixed;
+        left:0px;
+        bottom:0px;
+        width:100%;
+        height:50px;
+        z-index:9999;
+        text-align: center;
+        line-height: 50px;
+    }
+    .circle{
+        line-height: 20px;
+        vertical-align: middle;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: gray;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .left{
+        position: fixed;
+        top: 50%;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        background-image: url("img/jiantou.jpg");
+        background-size: cover;
+        opacity: 0.8;
+        transform: rotate(180deg);
+        z-index: 9999;
+        display:none;
+        cursor: pointer;
+    }
+    .right{
+        position: fixed;
+        top: 50%;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        background-image: url("img/jiantou.jpg");
+        background-size: cover;
+        opacity: 0.8;
+        z-index: 9999;
+        display:none;
+        cursor: pointer;
+    }
+    /*@keyframes mymove {*/
+        /*0% {opacity:0;}*/
+        /*30%{opacity:1;}*/
+        /*70%{opacity: 1;}*/
+        /*100% {opacity:0;}*/
+    /*}*/
+</style>
+<body>
+<div class="b-box">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+
+<div class="small">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+</div>
+<script>
+    var box = [];
+    var index = 0;
+    box = document.getElementsByClassName('box');
+    var circles = document.getElementsByClassName('circle');
+    var left = document.getElementsByClassName('left')[0];
+    var right = document.getElementsByClassName('right')[0];
+    for(var i=0;i<box.length;i++){
+        box[i].style.backgroundImage = 'url(img/'+(i+1)+'.jpg)';
+    }
+    for(var i=0;i<box.length;i++){
+        (function(i){
+            circles[i].onclick = function(){
+                clearInterval(timer);
+                if(i==4){
+                    index = 0;
+                }else{
+                    index = i+1;
+                }
+            box[i].style.zIndex = 999;
+            circles[i].style.backgroundColor = 'white';
+                for(var j=0;j<box.length;j++){
+                    if(i!=j){
+                        box[j].style.zIndex = 1;
+                        circles[j].style.backgroundColor = 'gray';
+                    }
+                }
+            timer = setInterval(swiper,3000);
+        }
+    })(i);
+    }
+    var timer = setInterval(swiper,3000);
+    function swiper(){
+        box[index].style.zIndex = 999;
+        circles[index].style.backgroundColor = 'white';
+        for(var j=0;j<box.length;j++){
+            if(index!=j){
+                box[j].style.zIndex = 1;
+                circles[j].style.backgroundColor = 'gray';
+            }
+        }
+        if(index == 4){
+            index = 0;
+        }else {
+            index++;
+        }
+        console.log(index);
+    }
+    circles[0].click();
+    document.getElementsByClassName('b-box')[0].onmouseover = function(){
+        left.style.display = 'block';
+        right.style.display = 'block';
+    };
+    document.getElementsByClassName('b-box')[0].onmouseout = function(){
+        left.style.display = 'none';
+        right.style.display = 'none';
+    }
+    left.onclick = function(){
+        if(index == 1){
+            circles[box.length-1].click();
+        }else if(index == 0){
+            circles[box.length-2].click();
+        }
+        else {
+            circles[index - 2].click();
+        }
+    }
+    right.onclick = function(){
+        circles[index].click();
+    }
+</script>
+</body>
+</html>
