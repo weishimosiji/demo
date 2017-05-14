@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的音乐播放器</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-size: 20px;
+            font-family: 方正舒体;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .background{
+            width: 100%;
+            height: 100%;
+            background-image: url("background3.jpg");
+            background-size: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .shade{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.6;
+            position: absolute;
+        }
+        .lyric{
+            width: 50%;
+            height: 100%;
+            margin-left: 50%;
+        }
+        .lyric-box{
+            margin-top: 15px;
+            margin-left: 20%;
+            width: 60%;
+            height: 77%;
+            /*border: 1px solid red;*/
+            overflow: hidden;
+        }
+        .lyric-container{
+            width: 100%;
+            transition:0.3s ease;
+        }
+        .lyric-box p{
+            color: white;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        .left-menu{
+            z-index: 7;
+            width: 500px;
+            height:465px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.8;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            transition: 1s ease;
+            -moz-transition: 1s ease; /* Firefox 4 */
+            -webkit-transition: 1s ease; /* Safari 和 Chrome */
+            -o-transition: 1s ease; /* Opera */
+            /*display: none;*/
+        }
+        .songinfo{
+            width: 500px;
+            height: 450px;
+            position: absolute;
+            top: 50px;
+            left: -20%;
+            border: 3px solid #959595;
+            border-radius: 5px;
+            transition: 1s ease 1s;
+            -moz-transition: 1s ease 1s; /* Firefox 4 */
+            -webkit-transition: 1s ease 1s; /* Safari 和 Chrome */
+            -o-transition: 1s ease 1s; /* Opera */
+        }
+        .songinfo p{
+            margin-top: 350px;
+            /*border: 1px solid red;*/
+            text-align: center;
+        }
+        .menuchange{
+            /*border: 1px solid red;*/
+            position: absolute;
+            top: 10px;
+            left: 90%;
+            width: 40px;
+            height: 40px;
+            background-image: url(img/icon/x.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .songcontainer{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 5px;
+        }
+        .rotato{
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            border: 5px solid #959595;
+            border-radius: 50%;
+            z-index: 999;
+            background-image: url(img/icon/cd.png);
+            background-size: cover;
+            background-position: center;
+        }
+        .rotato .songimg{
+            width: 198px;
+            height: 198px;
+            margin: 50px auto;
+            /*border: 1px solid red;*/
+            border-radius: 50%;
+            background-image: url(img/icon/test.jpg);
+            background-size: cover;
+        }
+        .songmenu{
+            width: 80%;
+            height: 50px;
+            margin: 20px 10% 0 10%;
+            /*border: 1px solid red;*/
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .songmenu .mylove,.download{
+            width: 40px;
+            height: 40px;
+            /*border: 1px solid red;*/
+        }
+        .type{
+            border: 3px solid #959595;
+            border-radius: 10px;
+            margin: 30px;
+            width: 85px;
+            height: 85px;
+            overflow: hidden;
+            position: relative;
+        }
+        .type .listen{
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url("img/icon/headset.png");
+            background-size: cover;
+            display: none;
+        }
+        .type img{
+            width: 70px;
+            height: 35px;
+            opacity: 1;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        .tab{
+            position: absolute;
+            bottom: 0;
+            left:217px;
+        }
+        .open{
+            width: 300px;
+            height: 50px;
+            position: absolute;
+            bottom: -45px;
+            display: none;
+            background-image: url("img/open.png");
+        }
+        .open:hover,.left:hover,.right:hover,.tab img:hover,.type:hover,.middle:hover,.menuchange:hover{
+            box-shadow: 0 0 3px 3px #959595;
+        }
+        .tab img:active,.middle:active{
+            background-image: url("img/guanbi2.png");
+        }
+        .left:active{
+            background-image: url("img/shangyiye2.png");
+        }
+        .right:active{
+            background-image: url("img/xiayiye2.png");
+        }
+        .open:active{
+            background-image: url("img/open2.png");
+        }
+        .songs{
+            width: 550px;
+            height: 70%;
+            position: absolute;
+            top: 7%;
+            left: 510px;
+            /*border: 1px solid red;*/
+            overflow: hidden;
+            transition: 1s ease;
+            -moz-transition: 1s ease; /* Firefox 4 */
+            -webkit-transition: 1s ease; /* Safari 和 Chrome */
+            -o-transition: 1s ease; /* Opera */
+        }
+        .list{
+            position: relative;
+            margin-left: 25px;
+            width: 500px;
+            height: 357px;
+            border: 3px solid #959595;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .list-container{
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 1s ease;
+            -moz-transition: 1s ease; /* Firefox 4 */
+            -webkit-transition: 1s ease; /* Safari 和 Chrome */
+            -o-transition: 1s ease; /* Opera */
+        }
+        .left{
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            width: 113px;
+            height: 43px;
+            background-image: url("img/shangyiye.png");
+        }
+        .right{
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 113px;
+            height: 43px;
+            background-image: url("img/xiayiye.png");
+        }
+        .middle{
+            position: absolute;
+            text-align: center;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -28px;
+            background-image: url("img/guanbi.png");
+            width: 57px;
+            height: 28px;
+        }
+        .list li{
+            line-height: 16%;
+            position: relative;
+            list-style-type:none;
+            margin-top: 20px;
+        }
+        .list li:after{
+            content:"";
+            position: absolute;
+            top: 100%;
+            margin-top: 17px;
+            width: 500px;
+            border-bottom: 3px solid #959595;
+        }
+        p{
+            padding-left: 3px;
+            padding-right: 3px;
+            line-height: 20px;
+            vertical-align: middle;
+            margin: 0;
+            height: 20px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: #959595;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .item{
+            position: absolute;
+            left: 0;
+            padding-left: 3px;
+            padding-right: 3px;
+            line-height: 20px;
+            vertical-align: middle;
+            margin: 0;
+            height: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: #959595;
+            cursor: pointer;
+            transition: 2s ease;
+            -moz-transition: 2s ease; /* Firefox 4 */
+            -webkit-transition: 2s ease; /* Safari 和 Chrome */
+            -o-transition: 2s ease; /* Opera */
+        }
+        .play{
+            position: fixed;
+            width: 100%;
+            height: 100px;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.5;
+            border-top: 3px solid #959595;
+        }
+        .last{
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            margin-left: -120px;
+            background-image: url("img/icon/rewind.png");
+            width: 64px;
+            height: 64px;
+        }
+        .next{
+            position: absolute;
+            top: 18px;
+            right: 50%;
+            margin-right: -120px;
+            background-image: url("img/icon/fast_forward.png");
+            width: 64px;
+            height: 64px;
+        }
+        .start{
+            position: absolute;
+            top: 18px;
+            right: 50%;
+            margin-right: -32px;
+            background-image: url("img/icon/pause.png");
+            width: 64px;
+            height: 64px;
+        }
+        .play .smallsongimg{
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            background-image: url(img/icon/test.jpg);
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+        }
+        .play .songupdatetime{
+            position: absolute;
+            top: 15px;
+            left: 130px;
+            width: 45px;
+            height: 20px;
+            font-size: 15px;
+            color: white;
+            text-align: right;
+        }
+        .play .songalltime{
+            position: absolute;
+            top: 15px;
+            left: 185px;
+            width: 50px;
+            height: 20px;
+            font-size: 15px;
+            color: white;
+        }
+        .play .songtime{
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+        .play .songname{
+            position: absolute;
+            top: 65px;
+            left: 130px;
+            width: 100px;
+            height: 20px;
+            color: white;
+            text-align: center;
+        }
+        .loop{
+            position: absolute;
+            top: 35px;
+            right: 280px;
+            background-image: url("img/icon/repeat.png");
+            width: 30px;
+            height: 30px;
+            background-size: cover;
+        }
+        .voice{
+            position: absolute;
+            top: 40px;
+            right: 450px;
+            background-image: url("img/icon/audio.png");
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+        }
+        .geci{
+            color: #959595;
+            position: absolute;
+            top: 40px;
+            right: 200px;
+            width: 40px;
+            height: 20px;
+        }
+        .voice-v{
+            position: absolute;
+            margin-top: -1px;
+            top: 50%;
+            right: 340px;
+            width: 100px;
+            height: 2px;
+            background-color: #ffffff;
+        }
+        .voice-v .voice-circle{
+            background-color: #ffffff;
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: -4px;
+            left: 95px;
+        }
+        .search{
+            /*background-color: black;
+            opacity: 0.5;*/
+            position: absolute;
+            top: 2px;
+            left: 24%;
+            width: 380px;
+            height: 40px;
+            line-height: 40px;
+            display: block;
+            transition:1s ease;
+            -moz-transition: 1s ease; /* Firefox 4 */
+            -webkit-transition: 1s ease; /* Safari 和 Chrome */
+            -o-transition: 1s ease; /* Opera */
+        }
+        .search input{
+            border-radius: 5px;
+            width: 100px;
+            background-color: white;
+            opacity: 0.3;
+            line-height: 20px;
+            display: inline-block;
+            vertical-align: center;
+            transition: 0.5s ease;
+            -moz-transition: 0.5s ease; /* Firefox 4 */
+            -webkit-transition: 0.5s ease; /* Safari 和 Chrome */
+            -o-transition: 0.5s ease; /* Opera */
+        }
+        .search p{
+            color: #959595;
+            margin-top: -7px;
+            display: inline-block;
+        }
+        .big-box{
+            border: 1px solid #959595;
+            width: 200%;
+            height: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            transition:1s ease;
+            -moz-transition: 1s ease; /* Firefox 4 */
+            -webkit-transition: 1s ease; /* Safari 和 Chrome */
+            -o-transition: 1s ease; /* Opera */
+        }
+        .iconmenu{
+            position: fixed;
+            width: 20%;
+            height: 50px;
+            top: 5px;
+            right: 0%;
+            /*border: 1px solid red;*/
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .iconmenu p{
+            display: inline-block;
+        }
+        .iconmenu div{
+            display: inline-block;
+        }
+        .changeicon{
+            visibility: hidden;
+        }
+        #denglu{
+            margin-top: -22px;
+            margin-right: 10px;
+            background:none;
+            border:none;
+            color: #959595;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="big-box">
+    <div class="shade">
+    </div>
+    <div class="lyric">
+            <div class="lyric-box">
+                <div class="lyric-container">
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                    <p>wiwiwiwiwiw</p>
+                </div>
+            </div>
+        </div>
+    <div class="background"></div>
+    <div class="songstext"></div>
+    <div class="songinfo">
+        <div class="songcontainer">
+            <div class="menuchange"></div>
+            <p id="onelyric">这里显示一排歌词</p>
+            <div class="songmenu">
+                <div class="mylove">
+                    <img src="img/icon/mylove.png" height="34" width="43" alt="">
+                </div>
+                <div class="download">
+                    <img src="img/icon/download.png" height="43" width="32" alt="">
+                </div>
+                <div class="-mob-share-ui-button -mob-share-open" style="background:none;padding:0;">
+                    <img src="img/icon/share.png" height="43" width="42" alt="">
+                </div>
+                <div class="-mob-share-ui" style="display: none">
+                    <ul class="-mob-share-list">
+                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                        <li class="-mob-share-qq"><p>QQ好友</p></li>
+                        <li class="-mob-share-renren"><p>人人网</p></li>
+                        <li class="-mob-share-kaixin"><p>开心网</p></li>
+                        <li class="-mob-share-douban"><p>豆瓣</p></li>
+                        <li class="-mob-share-facebook"><p>Facebook</p></li>
+                        <li class="-mob-share-twitter"><p>Twitter</p></li>
+                    </ul>
+                    <div class="-mob-share-close">取消</div>
+                </div>
+                <div class="-mob-share-ui-bg"></div>
+            </div>
+        </div>
+        <div class="rotato">
+            <div class="songimg"></div>
+        </div>
+    </div>
+    <div class="left-menu">
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/oumei.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/neidi.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/gangtai.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/hanguo.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/riben.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/minyao.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/yaogun.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/xiaoliang.png" alt="">
+        </div>
+        <div class="type">
+            <span class="listen"></span>
+            <img src="img/rege.png" alt="">
+        </div>
+        <div class="tab">
+            <span class="listen"></span>
+            <img src="img/guanbi.png" alt="">
+        </div>
+        <div class="open"></div>
+    </div>
+    <div class="search">
+        <p>查询歌曲</p>
+        <input type="search" id="search">
+    </div>
+    <div class="songs">
+        <div class="list">
+            <div class="list-container">
+                <p>暂时没有解析数据</p>
+            </div>
+        </div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="middle"></div>
+    </div>
+    <div class="iconmenu">
+        <div class="changeicon"><p>初始化</p></div>
+        <div><p id="changestyle">切换模式</p></div>
+        <input type="text" onclick="disp_prompt()" value="     登录/注册" id="denglu" />
+    </div>
+</div>
+    <div class="play">
+        <div class="songtime"></div>
+        <div class="smallsongimg"></div>
+        <div class="songalltime"></div>
+        <div class="songupdatetime"></div>
+        <div class="songname"></div>
+        <audio src="http://ws.stream.qqmusic.qq.com/200487081.m4a?fromtag=46" autoplay="autoplay"></audio>
+        <div class="last"></div>
+        <div class="start"></div>
+        <div class="next"></div>
+        <div class="voice"></div>
+        <div class="loop"></div>
+        <div class="geci"><p>歌词</p></div>
+        <div class="voice-v">
+            <div class="voice-circle"></div>
+        </div>
+    </div>
+    <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db67a700e8ee"></script>
+    <script>
+        var songmenu = document.getElementsByClassName('songinfo')[0];
+        var menuchange = document.getElementsByClassName('menuchange')[0];
+        var menu = document.getElementsByClassName('left-menu')[0];
+        var types = document.getElementsByClassName('type');
+        var open = document.getElementsByClassName('open')[0];
+        var topid = [3, 5, 6, 16, 17, 18, 19, 23, 26];
+        var lastIndex = null;
+        var lastsrc = null;
+        var close = document.getElementsByClassName('tab')[0];
+        var songsIndex = null;//当前播放歌曲在对象数组中的下标
+        var allsongs = [];//下载数据时把所有对象保存在这里
+        for(var i=0;i<types.length;i++){
+            (function(i) {
+                types[i].onclick = function () {
+                    changeType(i);
+                }
+            })(i);
+        }
+       var box = document.getElementsByClassName("left-menu")[0];
+       var imgArr = box.getElementsByTagName("img");
+       for(var i = 0;i<imgArr.length;i++){
+           (function (i) {
+               imgArr[i].onmousedown = function (e) {
+                   e.preventDefault();
+               }
+           })(i)
+       }
+        //切换类型时的逻辑操作
+        var changeType = function (i) {
+            if(lastIndex!=null){
+                var last = types[lastIndex].getElementsByTagName('img')[0];
+                types[lastIndex].getElementsByTagName('span')[0].style.display = 'none';
+                last.src = lastsrc;
+            }
+            var img = types[i].getElementsByTagName('img')[0];
+            types[i].getElementsByTagName('span')[0].style.display = 'block';
+            lastsrc = img.src;
+            var arr = img.src.split('.p');
+            var str;
+            str = arr[0]+2+'.p'+arr[1];
+            img.src = str;
+            list.style.top = 0+'px';
+            startload(i,thistime());
+            lastIndex = i;
+        };
+        //菜单滑动处理
+        close.onclick = function(){
+            menu.style.top = '-465px';
+            open.style.display = 'block';
+            songmenu.style.left = 0;
+            songmenu.style.transition = '1s ease 1s';
+            menu.style.transition = '1s ease';
+        };
+        open.onclick = function(){
+            menu.style.top = '0';
+            this.style.display = 'none';
+            songmenu.style.left = '-20%';
+            songmenu.style.transition = '1s ease';
+            menu.style.transition = '1s ease 1s';
+        };
+        var flag = false;
+        var downY = 0;
+        menu.onmousedown = function(event){
+            var ev = event||window.event;
+            flag = true;
+            menu.style.transition = '0s ease';
+            downY = ev.clientY - menu.offsetTop;
+            document.onmousemove = function(event){
+                if(flag){
+                    var ev = event||window.event;
+                    var Y = ev.clientY;
+                    if(menu.offsetTop>0){
+                        flag = false;
+                        menu.style.top = 0+'px';
+                        open.style.display = 'none';
+                    }else {
+                        menu.style.top = (Y - downY) + 'px';
+                    }
+                }
+            };
+            document.onmouseup = function(event){
+                var ev = event||window.event;
+                if(flag){
+                    flag = false;
+                }
+                menu.style.transition = '1s ease';
+                if(menu.offsetTop>-200){
+                    menu.style.top = 0;
+                }else{
+                    menu.style.top = '-465px';
+                    open.style.display = 'block';
+                    songmenu.style.left = 0;
+                    songmenu.style.transition = '1s ease 1s';
+                    menu.style.transition = '1s ease';
+                }
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        };
+        var list = document.getElementsByClassName('list-container')[0];
+        //获取系统时间并转化为url的数据格式
+        var thistime = function() {
+            var date = new Date();
+            var month = date.getMonth() < 10 ? (0 + '' + (date.getMonth() + 1)) : (date.getMonth() + 1 + '');
+            var minute = date.getMinutes();
+            if (minute < 10) {
+                minute = "0" +  minute;
+            } else if (minute < 10) {
+                minute = 0 + minute.toString();
+            }
+            var second = date.getSeconds();
+            if (second < 10) {
+                second = "0" + second;
+            }
+            var day = date.getDate();
+            if(day<10){
+                day = '0' + day;
+            }
+            var hour = date.getHours();
+            if(hour<10){
+                hour = '0'+hour;
+            }
+            var time = date.getFullYear().toString() + month +
+                day + hour +
+                minute.toString() + second;
+        // list.innerHTML = '<p>'+time+'</p>';
+        return time;
+        };
+        //解析歌曲数据
+        var showapiSign = '24a610dd7f6e45cfa6256ae62ecd7041';
+        var startload = function(songtype,time) {
+            var html = [];
+            allsongs = [];
+            var url = 'https://route.showapi.com/213-4?' +
+                'showapi_appid=31319&showapi_test_draft=false&showapi_timestamp=' + time + '&topid=' + topid[songtype] +
+                '&showapi_sign=' + showapiSign;
+            var req = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();
+            var push = function () {
+                list.innerHTML = html;
+            };
+            req.open("GET", url, true);
+            req.onreadystatechange = function (callback) {
+                if (req.readyState == 4) {
+                    if (req.status == 200) {
+                        var data = JSON.parse(req.responseText);
+                        console.log(data);
+                        var songs = data.showapi_res_body.pagebean.songlist;
+                        var page = 1;
+                        cutsongs(page,songs.length);
+                        for (var i = 0; i < songs.length; i++) {
+                            html.push('<li><p><span title="'+songs[i].songname+'" class="item">' + songs[i].songname + ' --&nbsp' + songs[i].singername + '</span></p></li>');
+                            allsongs.push(songs[i]);
+                        }
+                        push();
+                        //添加点击事件
+                        add(songs,1);
+                    } else {
+                        html.push('<li><p>' + '对不起,查询出错' + '</p></li>');
+                        push();
+                    }
+                }
+            };
+            req.send(null);
+        };
+        //startload(1,thistime());
+        //切换页数
+        var cutsongs = function(p,l){
+            var factor = Math.ceil(l/6);
+            var last = document.getElementsByClassName('left')[0];
+            var next = document.getElementsByClassName('right')[0];
+            last.onclick = function(){
+                if(p!=1) {
+                    list.style.top = -366 * (p - 2) + 'px';
+                    p--;
+                }
+            };
+            next.onclick = function(){
+                if(p!=factor) {
+                    list.style.top = -366 * p + 'px';
+                    p++;
+                }
+            };
+//            var cutsonglist = [];
+//            for(var i=(p-1)*6;i<6*p-1;i++){
+//                cutsonglist.push(songs[i]);
+//            }
+//            return cutsonglist;
+        };
+        var audio = document.getElementsByTagName('audio')[0];
+        var start = document.getElementsByClassName('start')[0];
+        start.onclick = function(){
+            if(audio.paused) {
+                this.style.backgroundImage = 'url(img/icon/pause.png)';
+                audio.play();
+            }else if(audio.played){
+                this.style.backgroundImage = 'url(img/icon/play.png)';
+                audio.pause();
+            }
+        };
+        //给歌单添加事件
+        function add(songs,type) {
+            var cutedsongs = document.getElementsByClassName('item');
+            var songitems = document.getElementsByTagName('li');
+            for(var i=0;i<cutedsongs.length;i++){
+                (function(i){
+                    cutedsongs[i].onclick = function(){
+                        console.log(this.innerHTML);
+                        console.log(this.title);
+                        songsIndex = i;
+                        var obj;
+                        if(type == 1){
+                            obj = songs.filter(function(a){
+                                return a.songname == cutedsongs[i].title;
+                            });
+                            audio.src = obj[0].url;
+                            loadlyric(obj[0].songid);
+                            smallsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_small+')';
+                            bigsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_big+')';
+                            currentsongname.innerHTML = allsongs[songsIndex].songname;
+                        }else if(type == 2){
+                            obj = songs.filter(function(a){
+                                return a.albumname == cutedsongs[i].title;
+                            });
+                            audio.src = obj[0].m4a;
+                            loadlyric(obj[0].songid);
+                            smallsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_small+')';
+                            bigsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_big+')';
+                            currentsongname.innerHTML = allsongs[songsIndex].songname;
+                        }
+                        // console.log(obj[0].url);
+                        //audio.pause();
+                        // audio.src = obj[0].url;
+                        //audio.play()
+                    };
+                    songitems[i].onmouseover = function(){
+                        var width = cutedsongs[i].offsetWidth;
+                        console.log(width);
+                        if(width>500){
+                            cutedsongs[i].style.left = -(width-500)+'px';
+                        }
+                        this.onmouseout = function(){
+                            cutedsongs[i].style.left = '0px';
+                        }
+                    }
+                })(i)
+            }
+        }
+        //下载歌词操作
+        var lyric = document.getElementsByClassName('lyric-container')[0];
+        function loadlyric(songid){
+            // lyric.innerHTML = songid;
+            var url = 'https://route.showapi.com/213-2?musicid='+songid+'&showapi_appid=31319&showapi_test_draft=false&showapi_timestamp='+thistime()+'&showapi_sign='+showapiSign;
+            lyric.innerHTML = '';
+            lyric.style.top = 0+'px';
+            var req = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();
+            req.open('GET',url,true);
+            req.onreadystatechange = function(){
+                if(req.readyState == 4){
+                    if(req.status == 200){
+                        var data = JSON.parse(req.responseText);
+                        var lyrictext = data.showapi_res_body.lyric;
+                        var cutedtext = cutlyric(lyrictext);
+                        lyric.innerHTML = cutedtext.toString().replace(/,/g,'');
+                    }else{
+                        lyrictext.innerHTML = '<p>查询错误</p>';
+                    }
+                }
+            };
+            req.send(null);
+        }
+        function cutlyric(text){
+            var html = [];
+            var lyric = text.split('offset&#58;0');
+            var text1 = lyric[1];
+            var lyric2 = text1.split('[');
+            lyric2.splice(0,1);
+            for(var i = 1;i<lyric2.length;i++){
+                var arr = lyric2[i].split(']');
+                var arr1 = arr[0].split('&#58;');
+                var arr2 = arr1[1].split('&#46;');
+                var mm = parseInt(arr1[0]*60+arr2[0]*1);
+                html.push('<p id="'+mm+'">'+arr[1]+'</p>'+'<br/>');
+            }
+            return html;
+        };
+        //同步歌词
+        var updatetime = '0:00';
+        var onelyric = document.getElementById('onelyric');
+        audio.ontimeupdate = function(){
+            var time = parseInt(this.currentTime);
+            updatetime =parseInt(parseInt(time)/60)+":"+(parseInt(time%60)<10?("0"+parseInt(time%60)):parseInt(time%60));
+            var str = updatetime+'/'+songupdatetime.innerHTML;
+            songupdatetime.innerHTML = updatetime;
+            jumpto(time);
+            songtime.style.left = parseInt(time/audio.duration*window.screen.width)-10+'px';
+        }
+
+        //这个id不好  没同步好
+
+        var jumpto = function(time){
+                var t = document.getElementById(time);
+                if(t){
+                    onelyric.innerHTML = t.innerHTML;
+                    t.style.color = 'yellow';
+                    t.style.fontSize = '25px';
+                    var index = getindex(t)/2-5;//html p标签后面加个<br/>所以/2
+                    var arr = elseof(t);
+                    for(var i=0;i<arr.length;i++){
+                        arr[i].style.color = 'white';
+                        arr[i].style.fontSize = 20+'px';
+                    }
+                    lyric.style.marginTop = -41*(index>0?index:0)+'px';
+                }
+        }
+        function getindex(t){
+                var index = 0;
+                var list = t.parentElement.children;
+                for(var i=0;i<list.length;i++){
+                    if(list[i]==t){
+                        index = i;
+                        break;
+                    }
+                }
+                return index;
+        };
+        var elseof = function(t){
+                var arr = [];
+                var list = t.parentElement.children;
+                for(var i=0;i<list.length;i++){
+                    if(list[i]!=t){
+                        arr.push(list[i]);
+                    }
+                }
+                return arr;
+        }
+
+        var geci = document.getElementsByClassName('geci')[0];
+        var background = document.getElementsByClassName('big-box')[0];
+        var check = 1;
+        geci.onclick = function(){
+            // window.scrollTo(document.body.scrollWidth,0);
+            if(check == 1){
+                background.style.left = '-100%';
+                geci.getElementsByTagName('p')[0].innerHTML = '主页';
+                check = 2;
+            }else{
+                background.style.left = '0';
+                geci.getElementsByTagName('p')[0].innerHTML = '歌词';
+                check = 1;
+            }
+            // alert(1);
+        }
+        var search = document.getElementById('search');
+        search.onclick = function(){
+            this.style.opacity = 1;
+            this.style.width = '200px';
+        }
+        search.onblur = function(){
+            this.style.opacity = 0.3;
+            this.style.width = '100px';
+        }
+        var songtime = document.getElementsByClassName('songtime')[0];
+        var voice = document.getElementsByClassName('voice-circle')[0];
+        // songtime.onclick = function(){
+        //     alert(1);
+        // }
+        songtime.onmousedown = function(event){
+            var ev = event||window.event;
+            var left = songtime.offsetWidth;
+            var downX = ev.clientX-left;
+            console.log(downX);
+            flag = true;
+            // alert(downX);
+            document.onmousemove = function(event){
+                if(flag){
+                    var ev = event||window.event;
+                    var X = ev.clientX;
+                    var w = window.screen.width;
+                    if(X<1){
+                        songtime.style.left = -10+'px';
+                    }
+                    else if(X>w-10){
+                        songtime.style.left = (w-10)+'px';
+                    }else{
+                        songtime.style.left = (X-10)+'px';
+                    }
+                }
+            }
+            document.onmouseup = function(event){
+                flag = false;
+                var ev = event||window.event;
+                var X = ev.clientX;
+                // songtime.style.left = (X-downX)+'px';
+                document.onmousemove = null;
+                document.onmouseup = null;
+                audio.currentTime = parseInt(songtime.style.left)/window.screen.width*audio.duration;
+            }
+        }
+        voice.onmousedown = function(event){
+            flag = true;
+            var ev = event||window.event;
+            var left = voice.offsetLeft;
+            var downX = ev.clientX-left-5;
+            document.onmousemove = function(event){
+                if(flag){
+                    var ev = event||window.event;
+                    var X = ev.clientX;
+                    if(X-downX<5){
+                        voice.style.left = -5+'px';
+                    }else if(X-downX>95){
+                        voice.style.left = 95+'px';
+                    }else{
+                        voice.style.left = (X-downX-5)+'px';
+                    }
+                    audio.volume = ((X-downX+5)/100).toFixed(1);
+                }
+            }
+            document.onmouseup = function(event){
+                flag = false;
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+        var loop = document.getElementsByClassName('loop')[0];
+        var looptype = 1;//1,列表循环 2,单曲循环 3,随机播放
+        loop.onclick = function(){
+            if(looptype == 1){
+                this.style.backgroundImage = 'url(img/icon/loop.png)';
+                looptype++;
+            }else if(looptype == 2){
+                this.style.backgroundImage = 'url(img/icon/shuffle.png)';
+                looptype++;
+            }else{
+                this.style.backgroundImage = 'url(img/icon/repeat.png)';
+                looptype = 1;
+            }
+        }
+        //menu切换js
+
+        menuchange.onclick = function(){
+            open.click();
+        }
+        var love = document.getElementsByClassName('mylove')[0];
+        var download = document.getElementsByClassName('download')[0];
+        //var share = document.getElementsByClassName('share')[0];
+        var loved = 1;
+        var downloaded = 1;
+        var shared = 1;
+        love.onclick = function(){
+            if(loved == 1){
+                this.getElementsByTagName('img')[0].src = 'img/icon/mylove2.png';
+                loved = 2;
+            }else{
+                this.getElementsByTagName('img')[0].src = 'img/icon/mylove.png';
+                loved = 1;
+            }
+            //关联我喜欢操作
+        }
+        download.onclick = function(){
+            if(downloaded == 1){
+                this.getElementsByTagName('img')[0].src = 'img/icon/download2.png';
+                downloaded = 2;
+            }else{
+                this.getElementsByTagName('img')[0].src = 'img/icon/download.png';
+                downloaded = 1;
+            }
+            //下载操作
+        }
+
+        var middle = document.getElementsByClassName('middle')[0];
+        var songlistcontainer = document.getElementsByClassName('songs')[0];
+        var changeicon = document.getElementsByClassName('changeicon')[0];
+        var searchmenu = document.getElementsByClassName('search')[0];
+        var changestyle = document.getElementById('changestyle');
+        var shade = document.getElementsByClassName('shade')[0];
+        middle.onclick = function(){
+            songlistcontainer.style.top = '-100%';
+            close.click();
+            songmenu.style.width = '30%';
+            songmenu.style.left = '10%';
+            changeicon.style.visibility = 'visible';
+            open.style.display = 'none';
+            searchmenu.style.top = -100+'px';
+            menuchange.style.display = 'none';
+        }
+        changeicon.onclick = function(){
+            songlistcontainer.style.top = '7%';
+            open.click();
+            songmenu.style.width = 500+'px';
+            songmenu.style.left = '-20%';
+            changeicon.style.visibility = 'hidden';
+            searchmenu.style.top = '2px';
+            menuchange.style.display = 'block';
+        }
+        var bigest = document.getElementsByClassName('background')[0];
+        var styletype = 1;//1夜间模式 2白天模式
+        var songitemcontainer = document.getElementsByClassName('list')[0];
+        changestyle.onclick = function(){
+            if(styletype == 1){
+                bigest.style.backgroundImage = 'url("background.jpg")';
+                shade.style.opacity = 0;
+                menu.style.opacity = 0.5;
+                var ap = document.getElementsByTagName('p');
+                for(var i = 0;i<ap.length;i++){
+                    ap[i].style.color = 'black';
+                }
+                var as = document.getElementsByTagName('span');
+                for(var i = 0;i<as.length;i++){
+                    as[i].style.color = 'black';
+                }
+                styletype = 2;
+            }else{
+                bigest.style.backgroundImage = 'url("background3.jpg")';
+                shade.style.opacity = 0.6;
+                menu.style.opacity = 0.8;
+                var ap = document.getElementsByTagName('p');
+                for(var i = 0;i<ap.length;i++){
+                    ap[i].style.color = '#959595';
+                }
+                var as = document.getElementsByTagName('span');
+                for(var i = 0;i<as.length;i++){
+                    as[i].style.color = '#959595';
+                }
+                styletype = 1;
+            }
+        }
+        searchmenu.getElementsByTagName('p')[0].onclick = function(){
+            searchsong(search.value,thistime(),1);
+        }
+        var songpage = 1;
+        var searchsong = function(info,time,page){
+            var html = [];
+            allsongs = [];
+            var url = 'https://route.showapi.com/213-1?keyword='+info+'&page='+page+'&showapi_appid=31319&showapi_timestamp='+time+'&showapi_sign='+showapiSign;
+            list.style.top = 0+'px';
+            var req = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();
+            var push = function () {
+                list.innerHTML = html;
+            };
+             req.open("GET", url, true);
+            req.onreadystatechange = function (callback) {
+                if (req.readyState == 4) {
+                    if (req.status == 200) {
+                        var data = JSON.parse(req.responseText);
+                        var songs = data.showapi_res_body.pagebean.contentlist;
+                        var page = 1;
+                        cutsongs(page,songs.length);
+                        for (var i = 0; i < songs.length; i++) {
+                            html.push('<li><p><span title="'+songs[i].albumname+'" class="item">' + songs[i].songname + ' --&nbsp' + songs[i].singername + '</span></p></li>');
+                            allsongs.push(songs[i]);
+                        }
+                        push();
+                        //添加点击事件
+                        add(songs,2);
+                    } else {
+                        html.push('<li><p>' + '对不起,查询出错' + '</p></li>');
+                        push();
+                    }
+                }
+            };
+            req.send(null);
+        }
+        //上一曲下一曲
+        var lastsong = document.getElementsByClassName('last')[0];
+        var nextsong = document.getElementsByClassName('next')[0];
+        var smallsongimg = document.getElementsByClassName('smallsongimg')[0];
+        var songupdatetime = document.getElementsByClassName('songupdatetime')[0];
+        var songalltime = document.getElementsByClassName('songalltime')[0];
+        var bigsongimg = document.getElementsByClassName('songimg')[0];
+        var currentsongname = document.getElementsByClassName('songname')[0];
+        lastsong.onclick = function(){
+            if(songsIndex==0){
+                songsIndex = 0;
+            }else{
+                songsIndex--;
+            }
+            if(allsongs[songsIndex].url!=null){
+                audio.src = allsongs[songsIndex].url;
+                loadlyric(allsongs[songsIndex].songid);
+                smallsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_small+')';
+                bigsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_big+')';
+                currentsongname.innerHTML = allsongs[songsIndex].songname;
+            }else{
+                audio.src = allsongs[songsIndex].m4a;
+                loadlyric(allsongs[songsIndex].songid);
+                smallsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_small+')';
+                bigsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_big+')';
+                currentsongname.innerHTML = allsongs[songsIndex].songname;
+            }
+        }
+        nextsong.onclick = function(){
+            if(songsIndex==allsongs.length-1){
+                songsIndex = 0;
+            }else{
+                songsIndex++;
+            }
+            if(allsongs[songsIndex].url!=null){
+                audio.src = allsongs[songsIndex].url;
+                loadlyric(allsongs[songsIndex].songid);
+                smallsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_small+')';
+                bigsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_big+')';
+                currentsongname.innerHTML = allsongs[songsIndex].songname;
+            }else{
+                audio.src = allsongs[songsIndex].m4a;
+                loadlyric(allsongs[songsIndex].songid);
+                smallsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_small+')';
+                bigsongimg.style.backgroundImage = 'url('+allsongs[songsIndex].albumpic_big+')';
+                currentsongname.innerHTML = allsongs[songsIndex].songname;
+            }
+        }
+        //audio时长改变自动去改变时间
+        window.onload = function changetime(){
+            audio.ondurationchange=function(){
+             songalltime.innerHTML = parseInt(parseInt(audio.duration)/60)+":"+(parseInt(audio.duration%60)<10?("0"+parseInt(audio.duration%60)):parseInt(audio.duration%60));
+            }
+        }();
+        audio.addEventListener('ended', function () {
+            if(looptype == 1){
+                nextsong.click();
+            }else if(looptype == 2){
+                audio.currentTime = 0;
+                audio.play();
+            }else{
+                songsIndex = Math.ceil(Math.random()*(allsongs.length-1));
+                nextsong.click();
+            }
+        });
+        function disp_prompt(){
+          var name=prompt("请输入您的名字","your name")
+          if (name!=null && name!="")
+            {
+                alert('登录成功');
+            }else{
+                alert('登录失败');
+            }
+          }
+    </script>
+
+</body>
+</html>
